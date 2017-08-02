@@ -126,6 +126,18 @@ connection_declined
     @IBOutlet var buttonConnect: UIButton!
     @IBOutlet var buttonHelpLink: UIButton!
     
+    
+    //StackViews
+    @IBOutlet weak var topInfoStackView: UIStackView!
+    @IBOutlet weak var urlStackView: UIStackView!
+    @IBOutlet weak var urlInfoStackView: UIStackView!
+    @IBOutlet weak var usernameStackView: UIStackView!
+    @IBOutlet weak var passwordStackView: UIStackView!
+    @IBOutlet weak var basicAuthInfoStackView: UIStackView!
+    @IBOutlet weak var connectButtonStackView: UIStackView!
+    @IBOutlet weak var helpButtonStackView: UIStackView!
+    
+    
     var urlNormalized: String!
     var validatedServerURL: String!
     var allAvailableAuthMethods = [AuthenticationMethod]()
@@ -299,7 +311,7 @@ connection_declined
     }
     
     private func setConnectButtonStyle(isEnabled: Bool) {
-        self.buttonConnect.layer.cornerRadius = self.buttonConnect.layer.bounds.height / 4
+        self.buttonConnect.layer.cornerRadius = self.buttonConnect.layer.bounds.height / 2
         self.buttonConnect.setTitleColor(UIColor.ofLoginButtonText(), for: .normal)
         
       if isEnabled {
@@ -361,19 +373,11 @@ connection_declined
     
     func updateUserAndPassFields(hiddenStatus: Bool) {
         
-        self.imageViewUsername.isHidden = hiddenStatus
-        self.textFieldUsername.isHidden = hiddenStatus
-        self.imageViewLeftPassword.isHidden = hiddenStatus
-        self.textFieldPassword.isHidden = hiddenStatus
-        self.imageViewRightPassword.isHidden = hiddenStatus
-        
-        if hiddenStatus {        //TODO: use constraints dependencies from above field instead,stack
-//
-//            self.buttonConnect.center = self.textFieldUsername.center
-//        } else {
-//            
-//             self.buttonConnect.center = self.textFieldUsername.center
-        }
+        UIView.animate(withDuration: 0.5, animations: {
+            self.usernameStackView.isHidden = hiddenStatus
+            self.passwordStackView.isHidden = hiddenStatus
+            self.basicAuthInfoStackView.isHidden = hiddenStatus
+        })
     }
     
     
