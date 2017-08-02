@@ -38,6 +38,12 @@ struct K {
 //    case Migrate
 //}
 
+public enum TextfieldType: String {
+    case url = "url"
+    case username = "username"
+    case password = "password"
+}
+
 @objc public enum StateCheckedURL: Int {
     case TestingConnection
     case ConnectionEstablished
@@ -387,7 +393,7 @@ connection_declined
     }
     
     func showPasswordEyeOnPasswordStackView(hiddenStatus: Bool) {
-        self.urlInfoStackView.isHidden = hiddenStatus
+        self.imageViewRightPassword.isHidden = hiddenStatus
     }
     
     
@@ -582,9 +588,27 @@ connection_declined
     
 // MARK: textField delegate
     public func textFieldDidEndEditing(_ textField: UITextField) {
-
-        self.checkCurrentUrl()
         
+        switch textField.restorationIdentifier! {
+        case TextfieldType.password.rawValue:
+            //TODO
+            break
+        case TextfieldType.url.rawValue:
+            self.checkCurrentUrl()
+            break
+        case TextfieldType.username.rawValue:
+            //Todo
+            break
+        default:
+            self.checkCurrentUrl()
+            break
+        }
+    }
+    
+    public func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField.restorationIdentifier! == TextfieldType.password.rawValue {
+            self.showPasswordEyeOnPasswordStackView(hiddenStatus: false)
+        }
     }
 
 
