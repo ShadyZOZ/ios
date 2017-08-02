@@ -159,7 +159,6 @@ connection_declined
             //Set background color of company image v
             //status bar k_is_text_login_status_bar_white
             self.setLabelsMessageStyle()
-            self.setConnectButtonStyle(isEnabled: false)
         
         self.initUI()
         
@@ -289,7 +288,17 @@ connection_declined
         self.labelPasswordFooter.textColor = UIColor.ofLoginErrorText()
     }
     
-    func setConnectButtonStyle(isEnabled: Bool) {
+    func enableLoginButton() {
+        self.buttonConnect.isEnabled = true
+        self.setConnectButtonStyle(isEnabled: true)
+    }
+    
+    func disableLoginButton() {
+        self.buttonConnect.isEnabled = false
+        self.setConnectButtonStyle(isEnabled: false)
+    }
+    
+    private func setConnectButtonStyle(isEnabled: Bool) {
         self.buttonConnect.layer.cornerRadius = self.buttonConnect.layer.bounds.height / 4
         self.buttonConnect.setTitleColor(UIColor.ofLoginButtonText(), for: .normal)
         
@@ -335,8 +344,7 @@ connection_declined
         self.updateUserAndPassFields(hiddenStatus: shouldBehiddenUserPassFields)
 
 
-        self.buttonConnect.isEnabled = false
-        
+        self.disableLoginButton()
         
         self.buttonHelpLink.isHidden = Customization.kIsShownHelpLinkOnLogin() ?  false : true
         
