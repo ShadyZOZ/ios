@@ -348,8 +348,6 @@ connection_declined
             self.imageViewLeftURL.isHidden = true
             self.textFieldURL.isHidden = true
             
-            
-            
         }
         
         let shouldBehiddenUserPassFields = (self.loginMode != .create) ? false : true ;
@@ -384,8 +382,13 @@ connection_declined
         self.urlStackView.isHidden = hiddenStatus
     }
     
+    func showReloadButtonOnURLInfoStackView(hiddenStatus: Bool) {
+        self.urlInfoStackView.isHidden = hiddenStatus
+    }
     
-    
+    func showPasswordEyeOnPasswordStackView(hiddenStatus: Bool) {
+        self.urlInfoStackView.isHidden = hiddenStatus
+    }
     
     
     // MARK: dismiss
